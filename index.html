@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slikberegneren</title>
+    <style>
+        body {
+            background: linear-gradient(to right, red, white);
+            color: black;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        select, input[type="number"], button {
+            font-size: 16px;
+            padding: 12px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 2px solid #ccc;
+        }
+        button {
+            background-color: #f44336;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #d32f2f;
+        }
+        .container {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Slikberegneren</h1>
+    <div class="container">
+        <label for="product">Vælg produkt:</label>
+        <select id="product">
+            <option value="Anthon Berg Marcipanbrød">Anthon Berg Marcipanbrød</option>
+            <option value="Bounty">Bounty</option>
+            <option value="Bubs Hallon Lakrits">Bubs Hallon Lakrits</option>
+            <option value="Coca Cola">Coca Cola</option>
+            <option value="Carletti Kæmpe Skildpadder">Carletti Kæmpe Skildpadder</option>
+            <option value="Center Bar">Center Bar</option>
+            <option value="Chips Lays">Chips Lays</option>
+            <option value="Chupa Chups">Chupa Chups</option>
+            <option value="Cocio">Cocio</option>
+            <option value="Daim">Daim</option>
+            <option value="Dr. Pepper">Dr. Pepper</option>
+            <option value="Dumle">Dumle</option>
+            <option value="Faxe Kondi">Faxe Kondi</option>
+            <option value="Fanta">Fanta</option>
+            <option value="Ferrero Rocher">Ferrero Rocher</option>
+            <option value="Fanta Lemon">Fanta Lemon</option>
+            <option value="Gajol">Gajol</option>
+            <option value="Haribo Goldbears">Haribo Goldbears</option>
+            <option value="Haribo Matador Mix">Haribo Matador Mix</option>
+            <option value="Hershey's">Hershey's</option>
+            <option value="Häagen-Dazs">Häagen-Dazs</option>
+            <option value="Kexchoklad">Kexchoklad</option>
+            <option value="Koldskål">Koldskål</option>
+            <option value="Knoppers">Knoppers</option>
+            <option value="Lays Chips">Lays Chips</option>
+            <option value="Lion Bar">Lion Bar</option>
+            <option value="Maltesers">Maltesers</option>
+            <option value="Maoam">Maoam</option>
+            <option value="Mentos">Mentos</option>
+            <option value="Mini Twix">Mini Twix</option>
+            <option value="Oreo">Oreo</option>
+            <option value="Pepsi">Pepsi</option>
+            <option value="Pingvin Mix">Pingvin Mix</option>
+            <option value="Plopp">Plopp</option>
+            <option value="Pringles">Pringles</option>
+            <option value="Red Bull">Red Bull</option>
+            <option value="Ritter Sport">Ritter Sport</option>
+            <option value="Skittles">Skittles</option>
+            <option value="Snickers">Snickers</option>
+            <option value="Soft Ice">Soft Ice</option>
+            <option value="Sundae">Sundae</option>
+            <option value="Twix">Twix</option>
+            <option value="Twist">Twist</option>
+            <option value="Coca Cola Zero">Coca Cola Zero</option>
+            <option value="Monster">Monster</option>
+            <option value="Peach Iced Tea">Peach Iced Tea</option>
+            <option value="SodaStream">SodaStream</option>
+            <option value="Powerade">Powerade</option>
+            <option value="7-Up">7-Up</option>
+        </select>
+    </div>
+
+    <div class="container">
+        <label for="amount">Indtast beløb:</label>
+        <input type="number" id="amount" placeholder="Beløb">
+    </div>
+
+    <div class="container">
+        <label for="currency">Vælg valuta:</label>
+        <select id="currency">
+            <option value="DKK">DKK</option>
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+            <option value="JPY">JPY</option>
+            <option value="BTC">Bitcoin</option>
+        </select>
+    </div>
+
+    <div class="container">
+        <label for="unit">Vælg enhed:</label>
+        <select id="unit">
+            <option value="kg">Kilogram</option>
+            <option value="g">Gram</option>
+            <option value="lb">Pund</option>
+            <option value="mg">Milligram</option>
+            <option value="liter">Liter</option>
+        </select>
+    </div>
+
+    <div class="container">
+        <button onclick="calculate()">Beregn</button>
+    </div>
+
+    <div id="result" class="container"></div>
+
+    <script>
+        const products = {
+            "Anthon Berg Marcipanbrød": 30,
+            "Bounty": 18,
+            "Bubs Hallon Lakrits": 12,
+            "Coca Cola": 6,
+            "Carletti Kæmpe Skildpadder": 22,
+            "Center Bar": 14,
+            "Chips Lays": 9,
+            "Chupa Chups": 4,
+            "Cocio": 14,
+            "Daim": 16,
+            "Dr. Pepper": 7,
+            "Dumle": 12,
+            "Faxe Kondi": 6,
+            "Fanta": 7,
+            "Ferrero Rocher": 40,
+            "Fanta Lemon": 7,
+            "Gajol": 8,
+            "Haribo Goldbears": 12,
+            "Haribo Matador Mix": 14,
+            "Hershey's": 22,
+            "Häagen-Dazs": 35,
+            "Kexchoklad": 12,
+            "Koldskål": 20,
+            "Knoppers": 17,
+            "Lays Chips": 10,
+            "Lion Bar": 15,
+            "Maltesers": 20,
+            "Maoam": 9,
+            "Mentos": 8,
+            "Mini Twix": 10,
+            "Oreo": 22,
+            "Pepsi": 6,
+            "Pingvin Mix": 15,
+            "Plopp": 14,
+            "Pringles": 18,
+            "Red Bull": 22,
+            "Ritter Sport": 12,
+            "Skittles": 10,
+            "Snickers": 14,
+            "Soft Ice": 30,
+            "Sundae": 18,
+            "Twix": 15,
+            "Twist": 13,
+            "Coca Cola Zero": 6,
+            "Monster": 20,
+            "Peach Iced Tea": 5,
+            "SodaStream": 18,
+            "Powerade": 12,
+            "7-Up": 6,
+        };
+
+        const exchangeRates = {
+            "EUR": 7.44,  // 1 DKK to EUR
+            "USD": 6.9,   // 1 DKK to USD
+            "JPY": 0.053, // 1 DKK to JPY
+            "BTC": 519000 // 1 BTC to DKK
+        };
+
+        function calculate() {
+            const product = document.getElementById("product").value;
+            const amount = parseFloat(document.getElementById("amount").value);
+            const currency = document.getElementById("currency").value;
+            const unit = document.getElementById("unit").value;
+
+            if (isNaN(amount) || amount <= 0) {
+                alert("Indtast venligst et gyldigt beløb.");
+                return;
+            }
+
+            let pricePerUnit = products[product];
+            let total;
+
+            // Hvis valutaen er DKK, beregn bare prisen direkte
+            if (currency === "DKK") {
+                total = amount / pricePerUnit;
+            } else {
+                // Beregn totalen i den valgte valuta
+                total = (amount / pricePerUnit) * exchangeRates[currency];
+            }
+
+            let unitLabel = "";
+            if (unit === "kg") unitLabel = "kg";
+            if (unit === "g") unitLabel = "gram";
+            if (unit === "lb") unitLabel = "pund";
+            if (unit === "mg") unitLabel = "milligram";
+            if (unit === "liter") unitLabel = "liter";
+
+            // Vist resultatet
+            let resultText = `${amount} ${currency} giver dig ca. ${total.toFixed(2)} ${unitLabel} af ${product}.`;
+
+            document.getElementById("result").innerText = resultText;
+        }
+    </script>
+</body>
+</html>
